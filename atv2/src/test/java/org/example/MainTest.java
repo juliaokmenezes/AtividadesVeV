@@ -73,6 +73,8 @@ class MainTest {
     public void testeAtualizarTituloTarefa() {
         GerenciadorTarefas gerenciadorTarefas = new GerenciadorTarefas();
         gerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "alta");
+        Tarefa novaTarefa = gerenciadorTarefas.getTarefa("titulo");
+
         String tarefaAtualizada = gerenciadorTarefas.atualizarTituloTarefa(novaTarefa, "novoTitulo");
         assertEquals("Título Alterado!", tarefaAtualizada);
     }
