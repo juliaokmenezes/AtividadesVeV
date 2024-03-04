@@ -26,15 +26,15 @@ class MainTest {
     @Test
     public void testAdicionarTarefa() {
 
-        String tarefaADD = addTarefa("titulo", "descricao", "01/01/2001", "prioridade");
+        String tarefaADD = GerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "prioridade");
         assertEquals("Tarefa Adicionada a Lista!", tarefaADD);
     }
     @Test
     public void testConferirListaTarefas() {
 
-        addTarefa("titulo", "descricao", "01/01/2001", "alta");
-        addTarefa("titulo2", "descricao2", "01/01/2001", "baixa");
-        Tarefa[] listaTarefaOficial = getListaTarefa();
+        GerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "alta");
+        GerenciadorTarefas.addTarefa("titulo2", "descricao2", "01/01/2001", "baixa");
+        Tarefa[] listaTarefaOficial = GerenciadorTarefas.getListaTarefa();
 
         int tamLista = listaTarefaOficial.getQtdTarefas();
 
@@ -46,66 +46,66 @@ class MainTest {
     public void testeExibirTarefa() {
         String titulo = "titulo";
         String descricao = "Descrição da minha tarefa";
-        addTarefa(titulo, descricao, "01/01/2001", "alta");
-        Tarefa tarefa = getTarefa("titulo");
+        GerenciadorTarefas.addTarefa(titulo, descricao, "01/01/2001", "alta");
+        Tarefa tarefa = GerenciadorTarefas.getTarefa("titulo");
 
         assertEquals(titulo, tarefa.getTitulo());
         assertEquals(descricao, tarefa.getDescricao());
     }
     @Test
     public void testeAtualizarTituloTarefa() {
-        addTarefa("titulo", "descricao", "01/01/2001", "alta");
-        String tarefaAtualizada = atualizarTituloTarefa(novaTarefa, "novoTitulo");
+        GerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "alta");
+        String tarefaAtualizada = GerenciadorTarefas.atualizarTituloTarefa(novaTarefa, "novoTitulo");
         assertEquals("Título Alterado!", tarefaAtualizada);
     }
 
     @Test
     public void testeAtualizarDescricaoTarefa() {
-        addTarefa("titulo", "descricao", "01/01/2001", "alta");
-        Tarefa novaTarefa = getTarefa("titulo");
+        GerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "alta");
+        Tarefa novaTarefa = GerenciadorTarefas.getTarefa("titulo");
 
-        String tarefaAtualizada = atualizarDescricaoTarefa(novaTarefa, "novaDescricao");
+        String tarefaAtualizada = GerenciadorTarefas.atualizarDescricaoTarefa(novaTarefa, "novaDescricao");
         assertEquals("Descrição Alterada!", tarefaAtualizada);
     }
 
     @Test
     public void testeAtualizarDataVencimentoTarefa() {
-        addTarefa("titulo", "descricao", "01/01/2001", "alta");
-        Tarefa novaTarefa = getTarefa("titulo");
-        String tarefaAtualizada = atualizarDataVencimentoTarefa(novaTarefa, "02/02/2002");
+        GerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "alta");
+        Tarefa novaTarefa = GerenciadorTarefas.getTarefa("titulo");
+        String tarefaAtualizada = GerenciadorTarefas.atualizarDataVencimentoTarefa(novaTarefa, "02/02/2002");
         assertEquals("Data de Vencimento Alterada!", tarefaAtualizada);
     }
 
 
     @Test
     public void testeAtualizarPrioridadeAltaTarefa() {
-        addTarefa("titulo", "descricao", "01/01/2001", "alta");
-        Tarefa novaTarefa = getTarefa("titulo");
-        String tarefaAtualizada = atualizarPrioridadeAltaTarefa(novaTarefa);
+        GerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "alta");
+        Tarefa novaTarefa = GerenciadorTarefas.getTarefa("titulo");
+        String tarefaAtualizada = GerenciadorTarefas.atualizarPrioridadeAltaTarefa(novaTarefa);
         assertEquals("A prioridade desta tarefa agora é ALTA", tarefaAtualizada);
     }
 
     @Test
     public void testeAtualizarPrioridadeBaixaTarefa() {
-        addTarefa("titulo", "descricao", "01/01/2001", "alta");
-        Tarefa novaTarefa = getTarefa("titulo");
-        String tarefaAtualizada = atualizarPrioridadeBaixaTarefa(novaTarefa);
+        GerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "alta");
+        Tarefa novaTarefa = GerenciadorTarefas.getTarefa("titulo");
+        String tarefaAtualizada = GerenciadorTarefas.atualizarPrioridadeBaixaTarefa(novaTarefa);
         assertEquals("A prioridade desta tarefa agora é BAIXA", tarefaAtualizada);
     }
 
     @Test
     public void testeAtualizarPrioridadeMediaTarefa() {
-        addTarefa("titulo", "descricao", "01/01/2001", "alta");
-        Tarefa novaTarefa = getTarefa("titulo");
-        String tarefaAtualizada = atualizarPrioridadeMediaTarefa(novaTarefa);
+        GerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "alta");
+        Tarefa novaTarefa = GerenciadorTarefas.getTarefa("titulo");
+        String tarefaAtualizada = GerenciadorTarefas.atualizarPrioridadeMediaTarefa(novaTarefa);
         assertEquals("A prioridade desta tarefa agora é MÉDIA", tarefaAtualizada);
     }
 
     @Test
     public void testeExcluirTarefaExistente() {
-        Tarefa[] listaTarefas = getListaTarefa();
-        addTarefa("titulo", "descricao", "01/01/2001", "alta");
-        Tarefa tarefa = getTarefa("titulo");
+        Tarefa[] listaTarefas = GerenciadorTarefas.getListaTarefa();
+        GerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "alta");
+        Tarefa tarefa = GerenciadorTarefas.getTarefa("titulo");
         listaTarefas.adicionarTarefa(tarefa);
 
         listaTarefas.excluirTarefa(tarefa);
@@ -115,8 +115,8 @@ class MainTest {
     @Test
     public void testeExcluirTarefaInexistente() {
         Tarefa[] listaTarefas = getListaTarefa();
-        addTarefa("titulo", "descricao", "01/01/2001", "alta");
-        Tarefa tarefa = getTarefa("titulo");
+        GerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "alta");
+        Tarefa tarefa = GerenciadorTarefas.getTarefa("titulo");
         listaTarefas.excluirTarefa(tarefa);
 
         assertTrue(listaTarefas.getTarefas().isEmpty());
@@ -124,7 +124,7 @@ class MainTest {
 
     @Test
     public void testeExibirListaVazia() {
-        Tarefa[] listaTarefas = getListaTarefa();
+        Tarefa[] listaTarefas = GerenciadorTarefas.getListaTarefa();
         assertEquals(0, listaTarefas.length);
 
     }
@@ -132,11 +132,11 @@ class MainTest {
     @Test
     public void testeExibirListaOrdenada() {
         Tarefa[] listaTarefas = getListaTarefa();
-        addTarefa("Titulo1", "Descricao1", "05/01/2024", "Alta");
-        addTarefa("Titulo2", "Descricao2", "02/01/2024", "Média");
-        addTarefa("Titulo3", "Descricao3", "03/01/2024", "Alta");
-        addTarefa("Titulo4", "Descricao4", "03/01/2024", "Baixa");
-        addTarefa("Titulo5", "Descricao5", "01/01/2024", "Baixa");
+        GerenciadorTarefas.addTarefa("Titulo1", "Descricao1", "05/01/2024", "Alta");
+        GerenciadorTarefas.addTarefa("Titulo2", "Descricao2", "02/01/2024", "Média");
+        GerenciadorTarefas.addTarefa("Titulo3", "Descricao3", "03/01/2024", "Alta");
+        GerenciadorTarefas.addTarefa("Titulo4", "Descricao4", "03/01/2024", "Baixa");
+        GerenciadorTarefas.addTarefa("Titulo5", "Descricao5", "01/01/2024", "Baixa");
 
 
         String listaEsperada = "1. Título5 - 01/01/2024 (Baixa)\n" +
