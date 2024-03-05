@@ -130,6 +130,7 @@ class MainTest {
     public void testeExcluirTarefaExistente() {
         GerenciadorTarefas gerenciadorTarefas = new GerenciadorTarefas();
         gerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "alta");
+        Tarefa tarefa = gerenciadorTarefas.getTarefa("titulo");
         String resposta = gerenciadorTarefas.excluirTarefa(tarefa);
 
         assertEquals("Tarefa Excluída!", resposta);
@@ -139,16 +140,17 @@ class MainTest {
     public void testeExcluirTarefaInexistente() {
         GerenciadorTarefas gerenciadorTarefas = new GerenciadorTarefas();
         gerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2001", "alta");
-        gerenciadorTarefas.excluirTarefa("titulo");
-        String resposta = gerenciadorTarefas.excluirTarefa("titulo");
+        Tarefa tarefa = gerenciadorTarefas.getTarefa("titulo");
+        gerenciadorTarefas.excluirTarefa(tarefa);
+        String resposta = gerenciadorTarefas.excluirTarefa(tarefa);
 
-        assertEquals("Não há tarefa com este título!", resposta);
+        assertEquals("Tarefa Inexistente", resposta);
     }
 
     @Test
     public void testeExibirListaVazia() {
         GerenciadorTarefas gerenciadorTarefas = new GerenciadorTarefas();
-        String lista = gerenciadorTarefas.getLista();
+        String lista = gerenciadorTarefas.getListaTarefas();
         String listaEsperada ="Nenhuma tarefa foi adicionada";
         assertEquals(listaEsperada, lista);
 
@@ -157,19 +159,20 @@ class MainTest {
     @Test
     public void testeExibirListaOrdenada() {
         GerenciadorTarefas gerenciadorTarefas = new GerenciadorTarefas();
-        gerenciadorTarefas.getListaTarefa();
+
         gerenciadorTarefas.addTarefa("Titulo1", "Descricao1", "05/01/2024", "Alta");
         gerenciadorTarefas.addTarefa("Titulo2", "Descricao2", "02/01/2024", "Média");
         gerenciadorTarefas.addTarefa("Titulo3", "Descricao3", "03/01/2024", "Alta");
         gerenciadorTarefas.addTarefa("Titulo4", "Descricao4", "03/01/2024", "Baixa");
         gerenciadorTarefas.addTarefa("Titulo5", "Descricao5", "01/01/2024", "Baixa");
 
-
+        String listaOriginal = gerenciadorTarefas.getListaTarefas();
         String listaEsperada = "1. Título5 - 01/01/2024 (Baixa)\n" +
                 "2. Título2 - 02/01/2024 (Média)\n" +
                 "3. Título3 - 03/01/2024 (Alta)\n" +
                 "4. Título4 - 03/01/2024 (Baixa)\n" +
-                "5. Título1 - 05/01/2024 (Alta)";
-        assertEquals(listaEsperada, listaTarefas.exibirLista());
+                "5. Título1 - 05/01/2024 (Alta)\n";
+
+        assertEquals(listaEsperada, listaOriginal);
     }
 }
