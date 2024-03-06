@@ -17,13 +17,11 @@ public class GerenciadorTarefas {
             listaTarefas.add(novaTarefa);
             return "Tarefa Adicionada a Lista!";
     }
-        else{
         for(Tarefa tarefa : listaTarefas){
             if (!Objects.equals(tarefa.getTitulo(), titulo)){
                 listaTarefas.add(novaTarefa);
                 return "Tarefa Adicionada a Lista!";
             }
-        }
     }
         return "Tarefa já adicionada a lista!";
 
@@ -89,38 +87,45 @@ public class GerenciadorTarefas {
             return "Nenhuma tarefa foi adicionada";
         }
         else {
-            Collections.sort(listaTarefas, new Comparator<Tarefa>() {
-                @Override
-                public int compare(Tarefa tarefa1, Tarefa tarefa2) {
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                    try {
-                        Date data1 = dateFormat.parse(tarefa1.dataVencimento);
-                        Date data2 = dateFormat.parse(tarefa2.dataVencimento);
-                        int compareData = data1.compareTo(data2);
-                        if (compareData != 0) {
-                            return compareData;
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    String[] prioridades = {"Alta", "Média", "Baixa"};
-                    int prioridadeIndex1 = getIndex(tarefa1.prioridade, prioridades);
-                    int prioridadeIndex2 = getIndex(tarefa2.prioridade, prioridades);
-                    return Integer.compare(prioridadeIndex1, prioridadeIndex2);
-                }
-            });
-
-            StringBuilder listaFormatada = new StringBuilder();
-            int index = 1;
-            for (Tarefa tarefa : listaTarefas) {
-                listaFormatada.append(index).append(". ")
-                        .append(tarefa.getTitulo()).append(" - ")
-                        .append(tarefa.dataVencimento).append(" (")
-                        .append(tarefa.prioridade).append(")\n");
-                index++;
-            }
-            return listaFormatada.toString();
+            ordenarTarefas();
+            return formatarListaTarefas();
         }
+    }
+
+    private void ordenarTarefas() {
+        Collections.sort(listaTarefas, new Comparator<Tarefa>() {
+            @Override
+            public int compare(Tarefa tarefa1, Tarefa tarefa2) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date data1 = dateFormat.parse(tarefa1.dataVencimento);
+                    Date data2 = dateFormat.parse(tarefa2.dataVencimento);
+                    int compareData = data1.compareTo(data2);
+                    if (compareData != 0) {
+                        return compareData;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                String[] prioridades = {"Alta", "Média", "Baixa"};
+                int prioridadeIndex1 = getIndex(tarefa1.prioridade, prioridades);
+                int prioridadeIndex2 = getIndex(tarefa2.prioridade, prioridades);
+                return Integer.compare(prioridadeIndex1, prioridadeIndex2);
+            }
+        });
+    }
+
+    private String formatarListaTarefas() {
+        StringBuilder listaFormatada = new StringBuilder();
+        int index = 1;
+        for (Tarefa tarefa : listaTarefas) {
+            listaFormatada.append(index).append(". ")
+                    .append(tarefa.getTitulo()).append(" - ")
+                    .append(tarefa.dataVencimento).append(" (")
+                    .append(tarefa.prioridade).append(")\n");
+            index++;
+        }
+        return listaFormatada.toString();
     }
     private int getIndex(String prioridade, String[] prioridades) {
         for (int i = 0; i < prioridades.length; i++) {
