@@ -15,18 +15,14 @@ public class Invoice {
 
     private Date date;
     private double totalAmount;
-    private String clientname;
-    private boolean payd;
+    private String clientName;
+    private boolean paid;
 
     public Invoice(Date date, double totalAmount, String clientName) {
         this.date = date;
         this.totalAmount = totalAmount;
-        this.clientname = clientName;
+        this.clientName = clientName;
 
-    }
-
-    public void setPayd() {
-        this.payd = true;
     }
 
 

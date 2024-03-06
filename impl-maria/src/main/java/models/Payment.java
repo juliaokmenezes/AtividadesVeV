@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +14,12 @@ import java.time.LocalDate;
 @Setter
 public class Payment {
 
-    private Double value;
-    private LocalDate date;
+    private Double amount;
+    private Date date;
     private String type;
+
+    public Payment(double amount, String ticket) {
+        this.amount = amount;
+        this.type = ticket;
+    }
 }

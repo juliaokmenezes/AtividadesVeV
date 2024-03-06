@@ -11,8 +11,8 @@ import java.util.Date;
 @Getter
 public class Ticket {
 
-    private String codigo;
-    private Date data;
-    private double valorPago;
+    private String code;
+    private Date date;
+    private double paidAmount;
 
 }

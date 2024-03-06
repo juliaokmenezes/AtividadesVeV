@@ -23,7 +23,7 @@ public class GeradorDeBoletosTests{
         Processor processor = new Processor();
         List<Payment> pagamentos = processor.processTicket(invoice, tickets);
 
-        assertTrue(invoice.isPayd());
+        assertTrue(invoice.isPaid());
         assertEquals(3, pagamentos.size());
     }
 
@@ -38,7 +38,7 @@ public class GeradorDeBoletosTests{
         Processor processor = new Processor();
         List<Payment> pagamentos = processor.processTicket(invoice, tickets);
 
-        assertFalse(invoice.isPayd());
+        assertFalse(invoice.isPaid());
         assertEquals(3, pagamentos.size());
     }
 
