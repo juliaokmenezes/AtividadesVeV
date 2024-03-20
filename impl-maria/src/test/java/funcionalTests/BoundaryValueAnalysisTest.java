@@ -42,11 +42,29 @@ public class BoundaryValueAnalysisTest {
 
     @Test
     public void testFaturaPagaComValorMaximo() {
-        // TODO
+        Invoice invoice = new Invoice(new Date(), 100.00, "Cliente C" , false);
+        List<Ticket> tickets = Arrays.asList(
+                new Ticket("001", new Date(), 100.00),
+                new Ticket("002", new Date(), 100.00)
+        );
+
+        Processor.processTicket(invoice, tickets);
+
+        assertTrue(invoice.isPaid());
     }
 
     @Test
     public void testFaturaNaoPagaComValorMaiorQueMaximo() {
-        // TODO
+
+        Invoice invoice = new Invoice(new Date(), 100.00, "Cliente D" , false);
+        List<Ticket> tickets = Arrays.asList(
+                new Ticket("001", new Date(), 50.00),
+                new Ticket("002", new Date(), 50.00)
+        );
+
+        Processor.processTicket(invoice, tickets);
+
+        assertFalse(invoice.isPaid());
+
     }
 }
