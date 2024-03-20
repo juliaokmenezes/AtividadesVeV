@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Processor {
 
-    public List<Payment> processTicket(Invoice invoice, List<Ticket> tickets) {
+    public static List<Payment> processTicket(Invoice invoice, List<Ticket> tickets) {
 
         List<Payment> payments = new ArrayList<>();
 
