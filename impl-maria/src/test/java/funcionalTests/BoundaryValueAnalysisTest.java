@@ -30,7 +30,14 @@ public class BoundaryValueAnalysisTest {
 
     @Test
     public void testFaturaNaoPagaComValorMenorQueMinimo() {
-        // TODO
+        Invoice invoice = new Invoice(new Date(), 100.00, "Cliente B" , false);
+        List<Ticket> tickets = Arrays.asList(
+                new Ticket("001", new Date(), 50.00)
+        );
+
+        Processor.processTicket(invoice, tickets);
+
+        assertFalse(invoice.isPaid());
     }
 
     @Test
