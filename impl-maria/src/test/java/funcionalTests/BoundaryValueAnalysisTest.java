@@ -4,9 +4,8 @@ import models.Invoice;
 import models.Ticket;
 import org.junit.Test;
 import service.Processor;
-
-import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -17,10 +16,8 @@ public class BoundaryValueAnalysisTest {
     @Test
     public void testFaturaPagaComValorMinimo() {
 
-        Invoice invoice = new Invoice(new Date(), 100.00, "Cliente A" , false);
-        List<Ticket> tickets = Arrays.asList(
-                new Ticket("001", new Date(), 100.00)
-        );
+        Invoice invoice = new Invoice(new Date(), 0.00, "Cliente A" , false);
+        List<Ticket> tickets = Collections.emptyList();
 
         Processor.processTicket(invoice, tickets);
 
@@ -29,10 +26,10 @@ public class BoundaryValueAnalysisTest {
     }
 
     @Test
-    public void testFaturaNaoPagaComValorMenorQueMinimo() {
-        Invoice invoice = new Invoice(new Date(), 100.00, "Cliente B" , false);
+    public void testFaturaNaoPagaComValorMinimoDoBoleto() {
+        Invoice invoice = new Invoice(new Date(), 1.00, "Cliente B" , false);
         List<Ticket> tickets = Arrays.asList(
-                new Ticket("001", new Date(), 50.00)
+                new Ticket("001", new Date(), 1.00)
         );
 
         Processor.processTicket(invoice, tickets);
@@ -41,11 +38,10 @@ public class BoundaryValueAnalysisTest {
     }
 
     @Test
-    public void testFaturaPagaComValorMaximo() {
-        Invoice invoice = new Invoice(new Date(), 100.00, "Cliente C" , false);
+    public void testFaturaPagaComValorMaximoDaFatura() {
+        Invoice invoice = new Invoice(new Date(),  Double.MAX_VALUE, "Cliente C" , false);
         List<Ticket> tickets = Arrays.asList(
-                new Ticket("001", new Date(), 100.00),
-                new Ticket("002", new Date(), 100.00)
+                new Ticket("001", new Date(), Double.MAX_VALUE)
         );
 
         Processor.processTicket(invoice, tickets);
@@ -54,17 +50,14 @@ public class BoundaryValueAnalysisTest {
     }
 
     @Test
-    public void testFaturaNaoPagaComValorMaiorQueMaximo() {
-
-        Invoice invoice = new Invoice(new Date(), 100.00, "Cliente D" , false);
+    public void testFaturaPagaComValorMaximoDoBoleto() {
+        Invoice invoice = new Invoice(new Date(),  Double.MAX_VALUE, "Cliente D" , false);
         List<Ticket> tickets = Arrays.asList(
-                new Ticket("001", new Date(), 50.00),
-                new Ticket("002", new Date(), 50.00)
+                new Ticket("001", new Date(), Double.MAX_VALUE)
         );
 
         Processor.processTicket(invoice, tickets);
 
-        assertFalse(invoice.isPaid());
-
+        assertTrue(invoice.isPaid());
     }
 }
