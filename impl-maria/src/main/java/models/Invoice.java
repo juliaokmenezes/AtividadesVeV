@@ -18,6 +18,7 @@ public class Invoice {
     private String clientName;
     private boolean paid;
 
+
     public Invoice(Date date, double totalAmount, String clientName) {
         this.date = date;
         this.totalAmount = totalAmount;
