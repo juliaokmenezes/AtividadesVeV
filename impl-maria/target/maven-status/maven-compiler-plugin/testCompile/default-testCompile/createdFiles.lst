@@ -1,0 +1,5 @@
+funcionalTests/DecisionTableTest.class
+GeradorDeBoletosTests.class
+funcionalTests/EquivalencePartitioningTest.class
+funcionalTests/BoundaryValueAnalysisTest.class
+junit5Tests/ProcessorTest.class
