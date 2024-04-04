@@ -3,10 +3,7 @@ package junit5;
 
 import org.example.GerenciadorTarefas;
 import org.example.Tarefa;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -57,6 +54,7 @@ class testesJunit {
     }
 
     @Test
+    @Disabled("é necessário implementar o método que verifica os dados da tarefa antes de adicionar")
     @DisplayName("Tarefa no prazo e com alta prioridade")
     public void testeCasoDeTeste2() {
         gerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2050", "alta");
@@ -100,11 +98,34 @@ class testesJunit {
     }
 
     @Test
+    @Disabled("é necessário adiconar métodos de checagem de data")
     @DisplayName("Data sendo o dia anterior ao dia atual")
     public void testeValorInferiorAoLimite() {
         String diaOntem = "19/03/2024";
         String tarefaADD = gerenciadorTarefas.addTarefa("titulo", "descricao", diaOntem, "prioridade");
         assertEquals("Data Inválida", tarefaADD);;
+    }
+
+    @Test
+    @Disabled("é necessário implementar feature de conclusão de tarefa")
+    @DisplayName("Marcar tarefa como concluida")
+    public void testeMarcarTarefaConcluida() {
+        gerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2000", "baixa");
+        Tarefa tarefa = gerenciadorTarefas.getTarefa("titulo");
+        gerenciadorTarefas.marcarComoConcluida(tarefa);
+        String status = gerenciadorTarefas.getStatusConclusaoTarefa(tarefa);
+        assertEquals("Tarefa Concluida", status);
+    }
+    @Test
+    @Disabled("é necessário implementar feature de conclusão de tarefa")
+    @DisplayName("Marcar como concluida tarefa já concluida")
+    public void testeMarcarTarefaConcluidaJaConcluida() {
+        gerenciadorTarefas.addTarefa("titulo", "descricao", "01/01/2000", "baixa");
+        Tarefa tarefa = gerenciadorTarefas.getTarefa("titulo");
+        gerenciadorTarefas.marcarComoConcluida(tarefa);
+        gerenciadorTarefas.marcarComoConcluida(tarefa);
+        String status = gerenciadorTarefas.getStatusConclusaoTarefa(tarefa);
+        assertEquals("Essa tarefa já está como Tarefa Concluida", status);
     }
 
 

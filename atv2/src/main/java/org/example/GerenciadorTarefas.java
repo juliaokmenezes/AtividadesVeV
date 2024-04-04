@@ -136,4 +136,10 @@ public class GerenciadorTarefas {
         return -1;
     }
 
+    public void marcarComoConcluida(Tarefa tarefa) {
+    }
+
+    public String getStatusConclusaoTarefa(Tarefa tarefa) {
+        return null;
+    }
 }
