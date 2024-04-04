@@ -1,4 +1,4 @@
-package junit5;
+package junit5Tests;
 
 
 import org.example.GerenciadorTarefas;
